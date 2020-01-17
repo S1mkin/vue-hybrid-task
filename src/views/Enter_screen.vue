@@ -1,31 +1,17 @@
-/* eslint-disable */
-
 <template>
-
-  <v-container class="text-center">
-
-    <v-row 
-      align-content="center"
-      align="center"
-      justify="center"
-    >
-      <v-col
-        cols="2"
-        sm="6"
-        xs="12"
-      >
-
+  <v-container id="main-page" class="text-center">
 
         <p class="display-1">Ready for a great<br>User experience?</p>
 
-        <p class="">Bring your media to the next level!</p>
+        <p class="mb-12">Bring your media to the next level!</p>
 
         <v-btn 
           depressed 
           x-large
           rounded
           color="#FFF"
-          class="text-capitalize"
+          class="text-capitalize mr-4"
+          to="/sign_up"
         >Sign Up</v-btn>
 
         <v-btn 
@@ -37,18 +23,6 @@
           <v-icon dark>mdi-arrow-right</v-icon>
         </v-btn>
 
-        <v-spacer></v-spacer>
-
-        <br>
-        
-        <v-text-field
-          label="User name"
-          outlined
-          rounded
-        ></v-text-field>
-
-      </v-col>
-    </v-row>
   </v-container>
 
 </template>
@@ -58,9 +32,15 @@
 // import HelloWorld from "@/components/HelloWorld.vue";
 
 export default {
-  name: "home",
+  name: "enter_screen",
   components: {
     //HelloWorld
   }
 };
 </script>
+
+<style scoped>
+#main-page {
+  background: #FAF3F3 url(/assets/bg_woman.svg) no-repeat left bottom;
+}
+</style>
