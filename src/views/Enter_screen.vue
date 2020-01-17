@@ -1,9 +1,9 @@
 <template>
-  <v-container id="main-page" class="text-center">
+  <v-container class="text-center">
 
-        <p class="display-1">Ready for a great<br>User experience?</p>
+        <p class="headline font-weight-bold">Ready for a great<br>User experience?</p>
 
-        <p class="mb-12">Bring your media to the next level!</p>
+        <p class="mb-12">Bring your media to the next<br>level!</p>
 
         <v-btn 
           depressed 
@@ -38,9 +38,3 @@ export default {
   }
 };
 </script>
-
-<style scoped>
-#main-page {
-  background: #FAF3F3 url(/assets/bg_woman.svg) no-repeat left bottom;
-}
-</style>

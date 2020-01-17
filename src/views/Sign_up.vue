@@ -1,7 +1,7 @@
 <template>
   <v-container class="text-center">
 
-    <p class="display-1">Sign Up</p>
+    <p class="headline font-weight-bold">Sign Up</p>
 
     <v-form
       ref="form"

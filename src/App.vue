@@ -21,6 +21,6 @@ export default {
 
 <style>
 main {
-  background-color: #FAF3F3;
+  background: #FAF3F3 url(assets/bg_woman.svg) no-repeat left bottom;
 }
 </style>
