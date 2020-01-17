@@ -34,3 +34,10 @@ export default {
   }),
 };
 </script>
+
+<style>
+main {
+  background: #FAF3F3;
+  background: url(assets/bg_woman.svg);
+}
+</style>

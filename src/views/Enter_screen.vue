@@ -2,21 +2,47 @@
 
 <template>
 
-  <v-container>
+  <v-container class="text-center">
 
-    Ready for a great User experience?
-
-    Bring your media to the next level!
-
-    <v-row>
+    <v-row 
+      align-content="center"
+      align="center"
+      justify="center"
+    >
       <v-col
-        cols="6"
+        cols="2"
         sm="6"
+        xs="12"
       >
+
+
+        <p class="display-1">Ready for a great<br>User experience?</p>
+
+        <p class="">Bring your media to the next level!</p>
+
+        <v-btn 
+          depressed 
+          x-large
+          rounded
+          color="#FFF"
+          class="text-capitalize"
+        >Sign Up</v-btn>
+
+        <v-btn 
+          class="mx-2"
+          depressed
+          fab 
+          dark 
+          color="#1E1A3E">
+          <v-icon dark>mdi-arrow-right</v-icon>
+        </v-btn>
+
+        <v-spacer></v-spacer>
+
+        <br>
         
         <v-text-field
-          v-model="label"
-          label="Label"
+          label="User name"
           outlined
           rounded
         ></v-text-field>
