@@ -4,11 +4,10 @@
     :rules="[rules.required, rules.min]"
     :type="show ? 'text' : 'password'"
     :name="field_name"
+    v-model="proxyValue"
     rounded
     filled
-    :label="field_label"
     hint="At least 8 characters"
-    :value="field_value"
     class="input-group--focused"
     @click:append="show = !show"
   ></v-text-field>
@@ -18,25 +17,27 @@
 export default {
   props: {
     name: String,
-    label: String,
     value: String
   },
   data() {
     return {
       field_name: this.name,
-      field_label: this.label,
-      field_value: this.value,
+      field_value: "",
       show: false,
-      password: "Password",
       rules: {
         required: value => !!value || "Required",
         min: v => v.length >= 8 || "Min 8 characters"
       }
     };
   },
-  methods: {
-    doSomethingInParentComponentFunction(selectedDate) {
-      this.$emit("selected", selectedDate);
+  computed: {
+    proxyValue: {
+      get() {
+        return this.value;
+      },
+      set(newValue) {
+        this.$emit("input", newValue);
+      }
     }
   }
 };

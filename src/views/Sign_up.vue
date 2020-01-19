@@ -14,7 +14,10 @@
       <v-text-field rounded filled v-model="sign_up_email"> </v-text-field>
 
       <labelField label="Password"></labelField>
-      <passwordField name="sign_up_password"></passwordField>
+      <passwordField
+        name="sign_up_password"
+        v-model="sign_up_password_value"
+      ></passwordField>
 
       <labelField label="Repeat password"></labelField>
       <passwordField
@@ -33,8 +36,7 @@
       >
     </v-form>
 
-    Password must contain 8+ symbols, 1 special and 2 capital letters -
-    {{ sign_up_repeat_password_value }}
+    Password must contain 8+ symbols, 1 special and 2 capital letters
 
     <p>
       Already have an account?
@@ -65,9 +67,11 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="scss" rel="stylesheet/scss">
 .form_wrap {
   background: #fff;
   border-radius: 20px;
 }
+
+$text-field-filled-full-width-outlined-slot-min-height: 96px !default;
 </style>
