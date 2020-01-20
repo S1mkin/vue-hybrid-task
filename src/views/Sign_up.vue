@@ -28,7 +28,20 @@
       >
       </v-text-field>
 
-      <labelField label="Password"></labelField>
+      <v-row no-gutters>
+        <v-col cols="8">
+          <labelField label="Password"> </labelField>
+        </v-col>
+        <v-col cols="4" class="text-right pr-6">
+          <v-tooltip top max-width="180">
+            <template v-slot:activator="{ on }">
+              <v-icon v-on="on">mdi-help-circle</v-icon>
+            </template>
+            Password must contain 8+ symbols, 1 special and 2 capital letters
+          </v-tooltip>
+        </v-col>
+      </v-row>
+
       <passwordField
         name="sign_up_password"
         v-model="sign_up_password"
@@ -51,8 +64,6 @@
         >Sign Up</v-btn
       >
     </v-form>
-
-    Password must contain 8+ symbols, 1 special and 2 capital letters
 
     <p>
       Already have an account?
@@ -111,6 +122,4 @@ export default {
   background: #fff;
   border-radius: 20px;
 }
-
-$text-field-filled-full-width-outlined-slot-min-height: 96px !default;
 </style>
