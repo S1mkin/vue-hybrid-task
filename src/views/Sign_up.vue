@@ -4,25 +4,40 @@
 
     <v-form
       ref="form"
-      :lazy-validation="lazy"
+      v-model="sign_up_valid"
+      lazy-validation
       class="px-4 py-8 mr-2 ml-2 mt-6 mb-6 form_wrap"
     >
       <labelField label="Full name"></labelField>
-      <v-text-field rounded filled v-model="sign_up_username"> </v-text-field>
+      <v-text-field
+        v-model="sign_up_username"
+        :rules="sign_up_username_rules"
+        required
+        rounded
+        filled
+      >
+      </v-text-field>
 
       <labelField label="E-mail"></labelField>
-      <v-text-field rounded filled v-model="sign_up_email"> </v-text-field>
+      <v-text-field
+        v-model="sign_up_email"
+        :rules="sign_up_email_rules"
+        required
+        rounded
+        filled
+      >
+      </v-text-field>
 
       <labelField label="Password"></labelField>
       <passwordField
         name="sign_up_password"
-        v-model="sign_up_password_value"
+        v-model="sign_up_password"
       ></passwordField>
 
       <labelField label="Repeat password"></labelField>
       <passwordField
         name="sign_up_repeat_password"
-        v-model="sign_up_repeat_password_value"
+        v-model="sign_up_repeat_password"
       ></passwordField>
 
       <v-btn
@@ -31,7 +46,8 @@
         rounded
         color="primary"
         class="text-capitalize"
-        to="/sign_up"
+        :disabled="!sign_up_valid"
+        @click="sign_up_submit"
         >Sign Up</v-btn
       >
     </v-form>
@@ -60,9 +76,32 @@ export default {
     return {
       sign_up_username: "",
       sign_up_email: "",
-      sign_up_password_value: "",
-      sign_up_repeat_password_value: ""
+      sign_up_password: "",
+      sign_up_repeat_password: "",
+
+      sign_up_valid: true,
+      sign_up_username_rules: [
+        v => !!v || "Name is required",
+        v => (v && v.length <= 10) || "Name must be less than 10 characters"
+      ],
+      sign_up_email_rules: [
+        v => !!v || "E-mail is required",
+        v =>
+          /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(v) ||
+          "E-mail must be valid"
+      ]
     };
+  },
+  methods: {
+    sign_up_submit() {
+      if (this.$refs.form.validate()) {
+        if (this.sign_up_password == this.sign_up_repeat_password) {
+          console.log("Form sending");
+        } else {
+          console.log("Error");
+        }
+      }
+    }
   }
 };
 </script>

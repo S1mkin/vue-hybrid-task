@@ -10,6 +10,7 @@
     hint="At least 8 characters"
     class="input-group--focused"
     @click:append="show = !show"
+    required
   ></v-text-field>
 </template>
 
@@ -25,7 +26,7 @@ export default {
       field_value: "",
       show: false,
       rules: {
-        required: value => !!value || "Required",
+        required: value => !!value || "Password required",
         min: v => v.length >= 8 || "Min 8 characters"
       }
     };
