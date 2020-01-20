@@ -58,6 +58,7 @@
         x-large
         rounded
         color="primary"
+        width="100%"
         class="text-capitalize"
         :disabled="!sign_up_valid"
         @click="sign_up_submit"

@@ -18,6 +18,7 @@
         x-large
         rounded
         color="primary"
+        width="100%"
         class="text-capitalize"
         to="/sign_in"
         >Sign In</v-btn

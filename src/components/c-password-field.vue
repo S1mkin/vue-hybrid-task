@@ -45,5 +45,7 @@ export default {
 </script>
 
 <style lang="scss" rel="stylesheet/scss">
-$text-field-dense-label-top: 100px !default;
+.v-input .theme--light.v-icon {
+  color: #1e1a3e;
+}
 </style>
