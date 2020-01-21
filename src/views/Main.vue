@@ -1,9 +1,32 @@
 <template>
   <div>
-    <v-app-bar class="header_fix text-center align-center" fixed height="80" floating="false">
+    <v-app-bar
+      class="header_fix text-center align-center"
+      fixed
+      height="80"
+      floating="false"
+    >
       <h1 class="headline font-weight-bold text-center mt-12 mb-6">
         Articles
       </h1>
+
+      <v-spacer></v-spacer>
+
+      <v-text-field
+        v-model="search_articles"
+        rounded
+        filled
+        clearable
+        background-color="#FFF"
+        hide-details="true"
+        prepend-inner-icon="search"
+        placeholder="Search"
+      >
+      </v-text-field>
+
+      <v-btn depressed x-large rounded color="#FFF" class="text-capitalize ml-4"
+        ><v-icon dark>mdi-swap-vertical</v-icon> New</v-btn
+      >
     </v-app-bar>
 
     <v-container class="pt-10">
@@ -41,12 +64,12 @@ import { mapGetters } from "vuex";
 
 export default {
   name: "main",
-  components: {},
   data() {
     return {
-      dialog: false
+      search_articles: ""
     };
   },
+  components: {},
   computed: {
     ...mapGetters(["get_articles"])
   }
