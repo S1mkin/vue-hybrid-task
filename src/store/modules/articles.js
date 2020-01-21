@@ -1,5 +1,9 @@
 export default {
   state: {
+    articles_sort_asc: false,
+    articles_sort_by: "date",
+    articles_search: null,
+
     // or load to state from DB
     articles: [
       {
@@ -76,18 +80,39 @@ export default {
   },
   getters: {
     get_articles(state) {
-      return state.articles.sort();
-    },
-    filtered_articles: function(state) {
-      return state.articles
-        .filter(event => {
-          return event.title.toLowerCase().match(this.search.toLowerCase());
-        })
-        .sort(function(a, b) {
-          return new Date(b.startDate) - new Date(a.startDate);
+      const articles_sort = [...state.articles].sort((a, b) => {
+        if (a[state.articles_sort_by] > b[state.articles_sort_by]) {
+          return 1;
+        }
+        if (a[state.articles_sort_by] < b[state.articles_sort_by]) {
+          return -1;
+        }
+        return 0;
+      });
+
+      if (!state.articles_sort_asc) {
+        articles_sort.reverse();
+      }
+
+      if (state.articles_search !== null) {
+        return articles_sort.filter(event => {
+          return event.text
+            .toLowerCase()
+            .match(state.articles_search.toLowerCase());
         });
+      } else {
+        return articles_sort;
+      }
     }
   },
   actions: {},
-  mutations: {}
+  mutations: {
+    set_articles_search(state, data) {
+      if (data.articles_search) {
+        state.articles_search = data.articles_search;
+      } else {
+        state.articles_search = null;
+      }
+    }
+  }
 };

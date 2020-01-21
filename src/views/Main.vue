@@ -21,6 +21,7 @@
         hide-details="true"
         prepend-inner-icon="search"
         placeholder="Search"
+        @input="set_articles_search_param"
       >
       </v-text-field>
 
@@ -60,18 +61,26 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
-
 export default {
   name: "main",
   data() {
     return {
-      search_articles: ""
+      search_articles: null,
+      sortBy: "ASC"
     };
   },
-  components: {},
   computed: {
-    ...mapGetters(["get_articles"])
+    get_articles() {
+      return this.$store.getters.get_articles;
+    }
+  },
+  methods: {
+    set_articles_search_param() {
+      this.$store.commit("set_articles_search", {
+        articles_search: this.search_articles
+      });
+      return this.search_articles;
+    }
   }
 };
 </script>
