@@ -46,8 +46,8 @@
             <div class="caption font-weight-bold indigo--text">
               {{ article.category }}
             </div>
-            <h2 class="list_articles__caption subtitle-2 mt-1 mb-1">
-              {{ article.caption }}
+            <h2 class="list_articles__title subtitle-2 mt-1 mb-1">
+              {{ article.title }}
             </h2>
             <div class="overline grey--text">
               {{ article.date }}
@@ -78,7 +78,7 @@ export default {
 
 <style scoped lang="scss" rel="stylesheet/scss">
 .list_articles {
-  &__caption {
+  &__title {
     line-height: 1.4em;
   }
 }
