@@ -24,9 +24,14 @@ export default {
 </script>
 
 <style>
-.main-content-wrap {
+#app {
   background-color: #faf3f3;
 }
+
+#app main {
+  margin: 0 auto;
+}
+
 #Enter_screen {
   background: #faf3f3 url(assets/bg_woman.svg) no-repeat left bottom;
 }
