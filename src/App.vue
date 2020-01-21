@@ -4,7 +4,6 @@
       href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900|Material+Icons"
       rel="stylesheet"
     />
-
     <v-content :id="currentRouteName" class="main-content-wrap pt-10">
       <router-view></router-view>
     </v-content>
@@ -23,9 +22,9 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss" rel="stylesheet/scss">
 #app {
-  background-color: #faf3f3;
+  background-color: $main-bg-color;
 }
 
 #app main {
@@ -33,6 +32,6 @@ export default {
 }
 
 #Enter_screen {
-  background: #faf3f3 url(assets/bg_woman.svg) no-repeat left bottom;
+  background: $main-bg-color url(assets/bg_woman.svg) no-repeat left bottom;
 }
 </style>
