@@ -1,7 +1,6 @@
 export default {
   state: {
     articles_sort_asc: false,
-    articles_sort_by: "date",
     articles_search: null,
 
     // OR LOAD TO STATE FROM DB
@@ -40,6 +39,46 @@ export default {
         text: "Text 5 articles",
         date: new Date(2017, 11, 17),
         image: require("@/assets/articles/preview-5.png")
+      },
+      {
+        title: "in aliqua mollit culpa ea",
+        category: "Tech",
+        text:
+          "Ex veniam labore incididunt quis duis cillum enim nisi excepteur. Enim minim cillum elit nisi velit. Anim culpa eiusmod adipisicing ex esse ipsum elit veniam consequat laboris proident ipsum cillum. Tempor deserunt aliquip magna consequat exercitation nisi sint. Voluptate Lorem aliqua est qui consectetur dolor commodo cillum commodo. Exercitation ex ad aliqua quis officia aute ipsum nulla magna sit pariatur est quis.\r\n",
+        date: new Date(2018, 11, 14),
+        image: require("@/assets/articles/preview-5.png")
+      },
+      {
+        title: "est tempor incididunt fugiat aliqua",
+        category: "Tech",
+        text:
+          "Irure non consectetur eiusmod dolore ex duis. Aliqua velit do in nulla ipsum ipsum. Veniam fugiat mollit culpa esse incididunt non aliquip nostrud commodo ut esse. Irure est labore quis velit mollit nostrud est elit Lorem anim laboris ut voluptate nostrud. Sit proident elit ullamco est non nostrud. Ea ipsum mollit voluptate aliqua ipsum culpa anim culpa. Laborum pariatur quis in adipisicing Lorem do deserunt occaecat occaecat eu ea.\r\n",
+        date: new Date(2018, 5, 18),
+        image: require("@/assets/articles/preview-5.png")
+      },
+      {
+        title: "ad do dolore veniam magna",
+        category: "Tech",
+        text:
+          "Cupidatat nostrud incididunt velit voluptate magna veniam et excepteur. Sunt est culpa pariatur quis voluptate tempor adipisicing aliquip labore amet et est tempor. Ipsum eiusmod culpa elit officia do occaecat ad nisi qui. Ullamco officia excepteur cillum elit duis sunt occaecat incididunt qui irure. Voluptate anim laboris laboris aliqua nulla laboris veniam enim.\r\n",
+        date: new Date(2015, 4, 4),
+        image: require("@/assets/articles/preview-5.png")
+      },
+      {
+        title: "ea sint est consectetur consectetur",
+        category: "Tech",
+        text:
+          "Dolor adipisicing aliquip dolore dolor do proident dolore. Lorem exercitation labore incididunt non commodo eiusmod aliquip laborum mollit. In sit veniam laborum eu occaecat nulla exercitation voluptate deserunt occaecat ex qui. Do minim anim anim amet ut anim nulla veniam aute magna consectetur dolor.\r\n",
+        date: new Date(2014, 3, 5),
+        image: require("@/assets/articles/preview-5.png")
+      },
+      {
+        title: "quis eiusmod duis amet non",
+        category: "Tech",
+        text:
+          "Velit cupidatat veniam ullamco ex aute pariatur aliqua cupidatat Lorem laboris minim sit do aute. Veniam ad velit incididunt deserunt ut aliquip mollit nostrud ullamco est commodo. Id anim duis exercitation elit aute consectetur. Aliquip ullamco veniam dolor sit eiusmod qui sint irure culpa eu nostrud. Voluptate ex incididunt deserunt elit ea. Enim dolore excepteur cillum sint excepteur aute. Consectetur magna deserunt voluptate Lorem irure minim ad.\r\n",
+        date: new Date(2018, 6, 24),
+        image: require("@/assets/articles/preview-5.png")
       }
     ]
   },
@@ -47,56 +86,46 @@ export default {
     GET_ARTICLES(state) {
       let articles_sort = [];
 
-      // FILTER
+      // FILTER - TITLE AND TEXT
       if (state.articles_search !== null) {
         articles_sort = [
           ...state.articles.filter(event => {
-            return event.text
-              .toLowerCase()
-              .match(state.articles_search.toLowerCase());
+            return (
+              event.title
+                .toLowerCase()
+                .match(state.articles_search.toLowerCase()) ||
+              event.text
+                .toLowerCase()
+                .match(state.articles_search.toLowerCase())
+            );
           })
         ];
       } else {
         articles_sort = [...state.articles];
       }
 
-      // SORT
+      // SORT BY DATE
       articles_sort = articles_sort.sort((a, b) => {
-        if (a[state.articles_sort_by] > b[state.articles_sort_by]) {
-          return 1;
-        }
-        if (a[state.articles_sort_by] < b[state.articles_sort_by]) {
-          return -1;
-        }
-        return 0;
+        return new Date(b.date) - new Date(a.date);
       });
 
-      if (!state.articles_sort_asc) {
+      if (state.articles_sort_asc) {
         articles_sort.reverse();
       }
 
-      // CONVERT DATE TO STRING
-      return articles_sort.map(function(article) {
-        article.date = article.date.toLocaleString("en-US", {
-          day: "2-digit",
-          month: "2-digit",
-          year: "numeric"
-        });
-        return article;
-      });
+      // RETURN RESULT
+      return articles_sort;
     }
   },
-  actions: {},
   mutations: {
     SET_ARTICLES_SEARCH(state, data) {
-      if (data.articles_search) {
-        state.articles_search = data.articles_search;
-      } else {
-        state.articles_search = null;
-      }
+      state.articles_search = data.articles_search
+        ? data.articles_search
+        : null;
     },
     SET_ARTICLES_SORT_ASC(state, data) {
       state.articles_sort_asc = data.articles_sort_asc;
     }
-  }
+  },
+  actions: {}
 };

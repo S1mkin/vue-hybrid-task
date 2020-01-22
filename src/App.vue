@@ -25,13 +25,13 @@ export default {
 <style lang="scss" rel="stylesheet/scss">
 #app {
   background-color: $main-bg-color;
-}
+  main {
+    margin: 0 auto;
+    min-width: 360px;
+  }
 
-#app main {
-  margin: 0 auto;
-}
-
-#Enter_screen {
-  background: $main-bg-color url(assets/bg_woman.svg) no-repeat left bottom;
+  #Enter_screen {
+    background: $main-bg-color url(assets/bg_woman.svg) no-repeat left bottom;
+  }
 }
 </style>

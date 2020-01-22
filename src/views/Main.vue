@@ -63,7 +63,7 @@
               {{ article.title }}
             </h2>
             <div class="overline grey--text">
-              {{ article.date }}
+              {{ article.date | DATE_TO_STR }}
             </div>
           </v-card-text>
         </div>
@@ -94,10 +94,24 @@ export default {
       return this.search_articles;
     },
     SET_ARTICLES_SORT_ASC() {
+      //if (this.articles_sort_asc === null) this.articles_sort_asc = true;
       this.articles_sort_asc = !this.articles_sort_asc;
       this.$store.commit("SET_ARTICLES_SORT_ASC", {
         articles_sort_asc: this.articles_sort_asc
       });
+    }
+  },
+  filters: {
+    DATE_TO_STR(value) {
+      if (value instanceof Date) {
+        return value.toLocaleString("en-GB", {
+          day: "2-digit",
+          month: "2-digit",
+          year: "numeric"
+        });
+      } else {
+        return "";
+      }
     }
   }
 };
