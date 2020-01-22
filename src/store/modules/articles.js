@@ -10,77 +10,42 @@ export default {
         title: "AR can erase the barriers in international business",
         category: "Tech",
         text: "Text 1 articles",
-        date: "24/03/2019",
+        date: new Date(2019, 2, 24),
         image: require("@/assets/articles/preview-1.png")
       },
       {
         title: "AR can erase the barriers in international business",
         category: "Tech",
         text: "Text 2 articles",
-        date: "17/01/2020",
+        date: new Date(2020, 0, 17),
         image: require("@/assets/articles/preview-2.png")
       },
       {
         title: "AR can erase the barriers in international business",
         category: "Tech",
         text: "Text 3 articles",
-        date: "19/01/2020",
+        date: new Date(2020, 0, 19),
         image: require("@/assets/articles/preview-3.png")
       },
       {
         title: "AR can erase the barriers in international business",
         category: "Tech",
         text: "Text 4 articles",
-        date: "15/02/2018",
+        date: new Date(2018, 1, 15),
         image: require("@/assets/articles/preview-4.png")
       },
       {
         title: "AR can erase the barriers in international business",
         category: "Tech",
         text: "Text 5 articles",
-        date: "17/12/2017",
-        image: require("@/assets/articles/preview-5.png")
-      },
-      {
-        title: "AR can erase the barriers in international business",
-        category: "Tech",
-        text: "Text 1 articles",
-        date: "24/03/2019",
-        image: require("@/assets/articles/preview-1.png")
-      },
-      {
-        title: "AR can erase the barriers in international business",
-        category: "Tech",
-        text: "Text 2 articles",
-        date: "17/01/2020",
-        image: require("@/assets/articles/preview-2.png")
-      },
-      {
-        title: "AR can erase the barriers in international business",
-        category: "Tech",
-        text: "Text 3 articles",
-        date: "19/01/2020",
-        image: require("@/assets/articles/preview-3.png")
-      },
-      {
-        title: "AR can erase the barriers in international business",
-        category: "Tech",
-        text: "Text 4 articles",
-        date: "15/02/2018",
-        image: require("@/assets/articles/preview-4.png")
-      },
-      {
-        title: "AR can erase the barriers in international business",
-        category: "Tech",
-        text: "Text 5 articles",
-        date: "17/12/2017",
+        date: new Date(2017, 11, 17),
         image: require("@/assets/articles/preview-5.png")
       }
     ]
   },
   getters: {
     get_articles(state) {
-      const articles_sort = [...state.articles].sort((a, b) => {
+      var articles_sort = [...state.articles].sort((a, b) => {
         if (a[state.articles_sort_by] > b[state.articles_sort_by]) {
           return 1;
         }
@@ -93,6 +58,17 @@ export default {
       if (!state.articles_sort_asc) {
         articles_sort.reverse();
       }
+
+      // format date to string
+      articles_sort = articles_sort.map(function(article) {
+        article.date =
+          article.date.getFullYear() +
+          "/" +
+          article.date.getMonth() +
+          "/" +
+          article.date.getDate();
+        return article;
+      });
 
       if (state.articles_search !== null) {
         return articles_sort.filter(event => {
@@ -113,6 +89,9 @@ export default {
       } else {
         state.articles_search = null;
       }
+    },
+    set_articles_sort_asc(state, data) {
+      state.articles_sort_asc = data.articles_sort_asc;
     }
   }
 };
