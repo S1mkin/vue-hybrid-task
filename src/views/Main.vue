@@ -16,7 +16,7 @@
             hide-details="true"
             prepend-inner-icon="search"
             placeholder="Search"
-            @input="set_articles_search_param"
+            @input="SET_ARTICLES_SEARCH_PARAM"
             class="articles__header__search-input"
           >
           </v-text-field>
@@ -28,7 +28,7 @@
             rounded
             color="#FFF"
             class="text-capitalize ml-2"
-            @click="set_articles_sort_asc"
+            @click="SET_ARTICLES_SORT_ASC"
             ><v-icon color="purple">mdi-swap-vertical</v-icon>
             <span v-html="articles_sort_asc ? 'Old' : 'New'"></span>
           </v-btn>
@@ -37,14 +37,14 @@
     </v-container>
 
     <v-container class="articles__items">
-      <v-row no-gutters v-if="get_articles.length == 0">
+      <v-row no-gutters v-if="GET_ARTICLES.length == 0">
         <v-col cols="12" class="text-center">
           <p class="ma-6" color="gray">Not Found</p>
         </v-col>
       </v-row>
 
       <v-card
-        v-for="(article, key) in get_articles"
+        v-for="(article, key) in GET_ARTICLES"
         :key="key"
         color="transparent"
         class="articles__items__row mb-2"
@@ -82,20 +82,20 @@ export default {
     };
   },
   computed: {
-    get_articles() {
-      return this.$store.getters.get_articles;
+    GET_ARTICLES() {
+      return this.$store.getters.GET_ARTICLES;
     }
   },
   methods: {
-    set_articles_search_param() {
-      this.$store.commit("set_articles_search", {
+    SET_ARTICLES_SEARCH_PARAM() {
+      this.$store.commit("SET_ARTICLES_SEARCH", {
         articles_search: this.search_articles
       });
       return this.search_articles;
     },
-    set_articles_sort_asc() {
+    SET_ARTICLES_SORT_ASC() {
       this.articles_sort_asc = !this.articles_sort_asc;
-      this.$store.commit("set_articles_sort_asc", {
+      this.$store.commit("SET_ARTICLES_SORT_ASC", {
         articles_sort_asc: this.articles_sort_asc
       });
     }
@@ -103,7 +103,7 @@ export default {
 };
 </script>
 
-<style scoped lang="scss" rel="stylesheet/scss">
+<style lang="scss" rel="stylesheet/scss">
 $height_header: 165px;
 
 .articles {
@@ -117,7 +117,6 @@ $height_header: 165px;
     box-shadow: 0 8px 2px -4px rgba(0, 0, 0, 0.1);
     padding-bottom: 0;
     &__search-input {
-      color: red;
       .v-icon {
         color: purple !important;
       }

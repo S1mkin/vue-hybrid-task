@@ -4,7 +4,7 @@ export default {
     articles_sort_by: "date",
     articles_search: null,
 
-    // or load to state from DB
+    // OR LOAD TO STATE FROM DB
     articles: [
       {
         title: "AR can erase the barriers in international business",
@@ -44,7 +44,7 @@ export default {
     ]
   },
   getters: {
-    get_articles(state) {
+    GET_ARTICLES(state) {
       let articles_sort = [];
 
       // FILTER
@@ -71,11 +71,11 @@ export default {
         return 0;
       });
 
-      if (state.articles_sort_asc) {
+      if (!state.articles_sort_asc) {
         articles_sort.reverse();
       }
 
-      // CONVERT DATE
+      // CONVERT DATE TO STRING
       return articles_sort.map(function(article) {
         article.date = article.date.toLocaleString("en-US", {
           day: "2-digit",
@@ -88,14 +88,14 @@ export default {
   },
   actions: {},
   mutations: {
-    set_articles_search(state, data) {
+    SET_ARTICLES_SEARCH(state, data) {
       if (data.articles_search) {
         state.articles_search = data.articles_search;
       } else {
         state.articles_search = null;
       }
     },
-    set_articles_sort_asc(state, data) {
+    SET_ARTICLES_SORT_ASC(state, data) {
       state.articles_sort_asc = data.articles_sort_asc;
     }
   }
