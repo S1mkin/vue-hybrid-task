@@ -30,7 +30,7 @@ export default {
       {
         title: "AR can erase the barriers in international business",
         category: "Tech",
-        text: "Text 4 articles",
+        text: "Text 3 articles",
         date: new Date(2018, 1, 15),
         image: require("@/assets/articles/preview-4.png")
       },
@@ -45,7 +45,23 @@ export default {
   },
   getters: {
     get_articles(state) {
-      var articles_sort = [...state.articles].sort((a, b) => {
+      let articles_sort = [];
+
+      // FILTER
+      if (state.articles_search !== null) {
+        articles_sort = [
+          ...state.articles.filter(event => {
+            return event.text
+              .toLowerCase()
+              .match(state.articles_search.toLowerCase());
+          })
+        ];
+      } else {
+        articles_sort = [...state.articles];
+      }
+
+      // SORT
+      articles_sort = articles_sort.sort((a, b) => {
         if (a[state.articles_sort_by] > b[state.articles_sort_by]) {
           return 1;
         }
@@ -55,30 +71,19 @@ export default {
         return 0;
       });
 
-      if (!state.articles_sort_asc) {
+      if (state.articles_sort_asc) {
         articles_sort.reverse();
       }
 
-      // format date to string
-      articles_sort = articles_sort.map(function(article) {
-        article.date =
-          article.date.getFullYear() +
-          "/" +
-          article.date.getMonth() +
-          "/" +
-          article.date.getDate();
+      // CONVERT DATE
+      return articles_sort.map(function(article) {
+        article.date = article.date.toLocaleString("en-US", {
+          day: "2-digit",
+          month: "2-digit",
+          year: "numeric"
+        });
         return article;
       });
-
-      if (state.articles_search !== null) {
-        return articles_sort.filter(event => {
-          return event.text
-            .toLowerCase()
-            .match(state.articles_search.toLowerCase());
-        });
-      } else {
-        return articles_sort;
-      }
     }
   },
   actions: {},

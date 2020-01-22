@@ -1,7 +1,7 @@
 <template>
   <div class="articles">
     <v-container class="articles__header" align-center justify-center>
-      <h1 class="headline font-weight-bold text-center mt-2 mb-4">
+      <h1 class="headline font-weight-bold text-center mt-10 mb-4">
         Articles
       </h1>
 
@@ -17,6 +17,7 @@
             prepend-inner-icon="search"
             placeholder="Search"
             @input="set_articles_search_param"
+            class="articles__header__search-input"
           >
           </v-text-field>
         </v-col>
@@ -28,15 +29,20 @@
             color="#FFF"
             class="text-capitalize ml-2"
             @click="set_articles_sort_asc"
-            ><v-icon dark>mdi-swap-vertical</v-icon>
-            <template v-if="articles_sort_asc">Old</template>
-            <template v-else>New</template>
+            ><v-icon color="purple">mdi-swap-vertical</v-icon>
+            <span v-html="articles_sort_asc ? 'Old' : 'New'"></span>
           </v-btn>
         </v-col>
       </v-row>
     </v-container>
 
     <v-container class="articles__items">
+      <v-row no-gutters v-if="get_articles.length == 0">
+        <v-col cols="12" class="text-center">
+          <p class="ma-6" color="gray">Not Found</p>
+        </v-col>
+      </v-row>
+
       <v-card
         v-for="(article, key) in get_articles"
         :key="key"
@@ -92,25 +98,30 @@ export default {
       this.$store.commit("set_articles_sort_asc", {
         articles_sort_asc: this.articles_sort_asc
       });
-      return this.articles_sort_asc;
     }
   }
 };
 </script>
 
 <style scoped lang="scss" rel="stylesheet/scss">
-$height_header: 125px;
+$height_header: 165px;
 
 .articles {
   &__header {
     position: fixed;
     top: 0;
-    left: 0;
+    width: inherit;
     height: $height_header;
     z-index: 2;
     background-color: $main-bg-color;
-    box-shadow: 0 4px 8px -4px gray;
+    box-shadow: 0 8px 2px -4px rgba(0, 0, 0, 0.1);
     padding-bottom: 0;
+    &__search-input {
+      color: red;
+      .v-icon {
+        color: purple !important;
+      }
+    }
   }
 
   &__items {
