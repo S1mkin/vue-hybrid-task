@@ -24,9 +24,10 @@
         <v-col cols="4" class="text-right">
           <v-btn
             depressed
-            x-large
             rounded
             color="#FFF"
+            height="46px"
+            width="90px"
             class="text-capitalize ml-2"
             @click="SET_ARTICLES_SORT_ASC"
             ><v-icon color="purple">mdi-swap-vertical</v-icon>
@@ -94,7 +95,6 @@ export default {
       return this.search_articles;
     },
     SET_ARTICLES_SORT_ASC() {
-      //if (this.articles_sort_asc === null) this.articles_sort_asc = true;
       this.articles_sort_asc = !this.articles_sort_asc;
       this.$store.commit("SET_ARTICLES_SORT_ASC", {
         articles_sort_asc: this.articles_sort_asc

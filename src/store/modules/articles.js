@@ -126,6 +126,5 @@ export default {
     SET_ARTICLES_SORT_ASC(state, data) {
       state.articles_sort_asc = data.articles_sort_asc;
     }
-  },
-  actions: {}
+  }
 };

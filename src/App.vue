@@ -27,7 +27,8 @@ export default {
   background-color: $main-bg-color;
   main {
     margin: 0 auto;
-    min-width: 360px;
+    max-width: 480px;
+    width: 100%;
   }
 
   #Enter_screen {
