@@ -108,7 +108,14 @@ export default {
     sign_up_submit() {
       if (this.$refs.form.validate()) {
         if (this.sign_up_password == this.sign_up_repeat_password) {
-          console.log("Form sending");
+          this.$store
+            .dispatch("SIGN_UP", {
+              username: this.sign_up_username,
+              email: this.sign_up_email,
+              password: this.sign_up_password
+            })
+            .then(() => this.$router.push("/sign_in"))
+            .catch(err => console.log(err));
         } else {
           console.log("Error");
         }

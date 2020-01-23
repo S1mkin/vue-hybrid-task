@@ -1,7 +1,7 @@
 <template>
   <div class="articles">
     <v-container class="articles__header" align-center justify-center>
-      <h1 class="headline font-weight-bold text-center mt-10 mb-4">
+      <h1 class="headline font-weight-bold text-center mb-4">
         Articles
       </h1>
 
@@ -60,9 +60,19 @@
             <div class="caption font-weight-bold indigo--text">
               {{ article.category }}
             </div>
-            <h2 class="articles__items__row__title subtitle-2 mt-1 mb-1">
-              {{ article.title }}
-            </h2>
+
+            <v-tooltip bottom width="100%">
+              <template v-slot:activator="{ on }">
+                <h2
+                  class="articles__items__row__title subtitle-2 mt-1 mb-1"
+                  v-on="on"
+                >
+                  {{ article.title }}
+                </h2>
+              </template>
+              {{ article.text }}
+            </v-tooltip>
+
             <div class="overline grey--text">
               {{ article.date | DATE_TO_STR }}
             </div>
@@ -122,10 +132,9 @@ $height_header: 165px;
 
 .articles {
   &__header {
-    position: fixed;
+    position: sticky;
     top: 0;
-    width: inherit;
-    height: $height_header;
+    width: 100%;
     z-index: 2;
     background-color: $main-bg-color;
     box-shadow: 0 8px 2px -4px rgba(0, 0, 0, 0.1);
@@ -138,7 +147,6 @@ $height_header: 165px;
   }
 
   &__items {
-    padding-top: $height_header;
     &__row {
       &__title {
         line-height: 1.4em;

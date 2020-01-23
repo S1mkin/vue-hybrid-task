@@ -11,7 +11,10 @@
       <v-text-field rounded filled v-model="sign_in_email"> </v-text-field>
 
       <labelField label="Password"></labelField>
-      <passwordField name="sign_in_password"></passwordField>
+      <passwordField
+        name="sign_in_password"
+        v-model="sign_in_password"
+      ></passwordField>
 
       <v-btn
         depressed
@@ -20,7 +23,7 @@
         color="primary"
         width="100%"
         class="text-capitalize"
-        to="/sign_in"
+        @click="sign_in_submit"
         >Sign In</v-btn
       >
     </v-form>
@@ -46,8 +49,19 @@ export default {
   data() {
     return {
       sign_in_email: "",
-      sign_in_password_value: ""
+      sign_in_password: ""
     };
+  },
+  methods: {
+    sign_in_submit() {
+      this.$store
+        .dispatch("SIGN_IN", {
+          email: this.sign_in_email,
+          password: this.sign_in_password
+        })
+        .then(() => this.$router.push("/main"))
+        .catch(err => console.log(err));
+    }
   }
 };
 </script>
