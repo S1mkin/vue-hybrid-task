@@ -1,7 +1,7 @@
 export default {
   state: {
     username: "",
-    email: "test@mail.ru ",
+    email: "test@mail.ru",
     password: "12345678",
     status_auth: false
   },
@@ -17,9 +17,10 @@ export default {
       state.password = data.password; // ONLY FOR TEST
     },
     LOGIN(state, data) {
-      // console.log('data.email: ' + data.email + ' state.email: ' + state.email);
-      if (data.email == state.email && data.password == state.password) {
-        state.status_auth = true;
+      if (data.email === state.email && data.password === state.password) {
+        return (state.status_auth = true);
+      } else {
+        return "Wrong";
       }
     },
     LOGOUT(state) {
@@ -40,7 +41,13 @@ export default {
       RESPONSE = true => RETURN TRUE
       RESPONSE = false => RETURN FALSE
       *****************/
-      state.commit("LOGIN", data);
+      return new Promise((resolve, reject) => {
+        if (state.commit("LOGIN", data)) {
+          resolve("Login success");
+        } else {
+          reject("Wrong email or password");
+        }
+      });
     }
   }
 };

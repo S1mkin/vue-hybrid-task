@@ -4,7 +4,7 @@
       href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900|Material+Icons"
       rel="stylesheet"
     />
-    <v-content :id="currentRouteName" class="main-content-wrap pt-10">
+    <v-content :id="currentRouteName" class="pt-10">
       <router-view></router-view>
     </v-content>
   </v-app>

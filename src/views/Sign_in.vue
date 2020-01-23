@@ -33,6 +33,19 @@
       <v-spacer></v-spacer>
       <router-link to="/sign_up">Sign Up</router-link>
     </p>
+
+    <v-alert
+      v-if="sign_in_error !== ''"
+      v-model="alert"
+      type="warning"
+      dismissible
+      color="cyan"
+      border="left"
+      elevation="2"
+      colored-border
+      v-html="sign_in_error"
+    >
+    </v-alert>
   </v-container>
 </template>
 
@@ -49,18 +62,23 @@ export default {
   data() {
     return {
       sign_in_email: "",
-      sign_in_password: ""
+      sign_in_password: "",
+      sign_in_error: ""
     };
   },
   methods: {
     sign_in_submit() {
+      this.sign_in_error = "";
+
       this.$store
         .dispatch("SIGN_IN", {
           email: this.sign_in_email,
           password: this.sign_in_password
         })
-        .then(() => this.$router.push("/main"))
-        .catch(err => console.log(err));
+        .then(() => {
+          this.$router.push({ name: "Main" });
+        })
+        .catch(err => (this.sign_in_error = err));
     }
   }
 };
