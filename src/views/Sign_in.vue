@@ -1,6 +1,6 @@
 <template>
   <v-container class="text-center">
-    <p class="headline font-weight-bold">Sign In</p>
+    <h1 class="headline font-weight-bold">Sign In</h1>
 
     <v-form
       ref="form"
@@ -8,7 +8,14 @@
       class="px-4 py-8 mt-6 mb-6 form-wrap"
     >
       <labelField label="E-mail"></labelField>
-      <v-text-field rounded filled v-model="sign_in_email"> </v-text-field>
+      <v-text-field
+        v-model="sign_in_email"
+        :rules="sign_in_email_rules"
+        required
+        rounded
+        filled
+      >
+      </v-text-field>
 
       <labelField label="Password"></labelField>
       <passwordField
@@ -61,13 +68,14 @@ export default {
     return {
       sign_in_email: "",
       sign_in_password: "",
-      sign_in_error: ""
+      sign_in_error: "",
+      sign_in_email_rules: [
+        v => !!v || "E-mail is required",
+        v =>
+          /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(v) ||
+          "E-mail must be valid"
+      ]
     };
-  },
-  computed: {
-    REMOVE_ALERT() {
-      return this.sign_in_email && this.sign_in_password;
-    }
   },
   methods: {
     SIGN_IN_SUBMIT() {

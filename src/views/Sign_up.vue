@@ -1,12 +1,12 @@
 <template>
   <v-container class="text-center">
-    <p class="headline font-weight-bold">Sign Up</p>
+    <h1 class="headline font-weight-bold">Sign Up</h1>
 
     <v-form
       ref="form"
       v-model="sign_up_valid"
       lazy-validation
-      class="px-4 py-8 mr-2 ml-2 mt-6 mb-6 form-wrap"
+      class="px-4 py-8 mt-6 mb-6 form-wrap"
     >
       <labelField label="Full name"></labelField>
       <v-text-field
@@ -61,7 +61,7 @@
         width="100%"
         class="text-capitalize"
         :disabled="!sign_up_valid"
-        @click="sign_up_submit"
+        @click="SIGN_UP_SUBMIT"
         >Sign Up</v-btn
       >
     </v-form>
@@ -105,7 +105,7 @@ export default {
     };
   },
   methods: {
-    sign_up_submit() {
+    SIGN_UP_SUBMIT() {
       if (this.$refs.form.validate()) {
         if (this.sign_up_password == this.sign_up_repeat_password) {
           this.$store

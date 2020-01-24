@@ -7,7 +7,6 @@
     v-model="proxyValue"
     rounded
     filled
-    hint="At least 8 characters"
     class="input-group--focused"
     @click:append="show = !show"
     required
