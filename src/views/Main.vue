@@ -38,12 +38,6 @@
     </v-container>
 
     <v-container class="articles__items">
-      <v-row no-gutters v-if="GET_ARTICLES.length == 0">
-        <v-col cols="12" class="text-center">
-          <p class="ma-6" color="gray">Not Found</p>
-        </v-col>
-      </v-row>
-
       <v-card
         v-for="(article, key) in GET_ARTICLES"
         :key="key"
@@ -79,6 +73,17 @@
           </v-card-text>
         </div>
       </v-card>
+
+      <v-row no-gutters>
+        <v-col cols="12" class="articles__items__after text-center">
+          <p
+            class="ma-6"
+            v-text="
+              GET_ARTICLES.length == 0 ? 'Not Found' : 'The end of the list'
+            "
+          ></p>
+        </v-col>
+      </v-row>
     </v-container>
   </div>
 </template>
@@ -151,6 +156,12 @@ $height_header: 165px;
       &__title {
         line-height: 1.4em;
       }
+    }
+    &__after {
+      font-size: 14px;
+      line-height: 140%;
+      color: #cca4a4;
+      font-weight: 600;
     }
   }
 }
