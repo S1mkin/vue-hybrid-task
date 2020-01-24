@@ -4,7 +4,7 @@
       href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900|Material+Icons"
       rel="stylesheet"
     />
-    <v-content :id="currentRouteName" class="pt-10">
+    <v-content :id="currentRouteName">
       <router-view></router-view>
     </v-content>
   </v-app>
@@ -29,6 +29,7 @@ export default {
     margin: 0 auto;
     max-width: 480px;
     width: 100%;
+    padding: 40px 20px 0 !important;
   }
 
   #Enter_screen {

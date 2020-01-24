@@ -5,7 +5,7 @@
     <v-form
       ref="form"
       :lazy-validation="lazy"
-      class="px-4 py-8 mr-2 ml-2 mt-6 mb-6 form_wrap"
+      class="px-4 py-8 mt-6 mb-6 form-wrap"
     >
       <labelField label="E-mail"></labelField>
       <v-text-field rounded filled v-model="sign_in_email"> </v-text-field>
@@ -23,7 +23,7 @@
         color="primary"
         width="100%"
         class="text-capitalize"
-        @click="sign_in_submit"
+        @click="SIGN_IN_SUBMIT"
         >Sign In</v-btn
       >
     </v-form>
@@ -34,18 +34,16 @@
       <router-link to="/sign_up">Sign Up</router-link>
     </p>
 
-    <v-alert
-      v-if="sign_in_error !== ''"
-      v-model="alert"
-      type="warning"
-      dismissible
-      color="cyan"
-      border="left"
-      elevation="2"
-      colored-border
-      v-html="sign_in_error"
-    >
-    </v-alert>
+    <div class="form-alert-wrap" v-if="sign_in_error !== ''">
+      <v-alert>
+        <v-row align="center">
+          <v-col class="grow py-0 pr-0">{{ sign_in_error }}</v-col>
+          <v-col class="shrink py-0 pl-0">
+            <v-icon dark @click="CLOSE_ALERT">mdi-close</v-icon>
+          </v-col>
+        </v-row>
+      </v-alert>
+    </div>
   </v-container>
 </template>
 
@@ -66,8 +64,13 @@ export default {
       sign_in_error: ""
     };
   },
+  computed: {
+    REMOVE_ALERT() {
+      return this.sign_in_email && this.sign_in_password;
+    }
+  },
   methods: {
-    sign_in_submit() {
+    SIGN_IN_SUBMIT() {
       this.sign_in_error = "";
 
       this.$store
@@ -76,17 +79,34 @@ export default {
           password: this.sign_in_password
         })
         .then(() => {
+          console.log("Sign In success");
           this.$router.push({ name: "Main" });
         })
         .catch(err => (this.sign_in_error = err));
+    },
+    // custom close icon for alert
+    CLOSE_ALERT() {
+      this.sign_in_error = "";
     }
   }
 };
 </script>
 
-<style scoped>
-.form_wrap {
-  background: #fff;
-  border-radius: 20px;
+<style lang="scss" rel="stylesheet/scss">
+.form-alert-wrap {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  padding: 12px;
+  width: 100%;
+  .v-alert {
+    background-color: #ff6683;
+    border-radius: 50px;
+    color: #fff;
+    width: 100%;
+    .v-icon {
+      cursor: pointer;
+    }
+  }
 }
 </style>

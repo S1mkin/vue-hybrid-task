@@ -35,15 +35,17 @@ export default {
       *****************/
       state.commit("CREATE_USER", data);
     },
-    SIGN_IN(state, data) {
+    SIGN_IN({ state, commit }, data) {
       /***************** 
       SEND AXIOS QUERY TO BACKEND
       RESPONSE = true => RETURN TRUE
       RESPONSE = false => RETURN FALSE
       *****************/
+      commit("LOGIN", data);
+
       return new Promise((resolve, reject) => {
-        if (state.commit("LOGIN", data)) {
-          resolve("Login success");
+        if (state.status_auth) {
+          resolve("Sign In success");
         } else {
           reject("Wrong email or password");
         }

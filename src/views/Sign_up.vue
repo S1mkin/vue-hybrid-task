@@ -6,7 +6,7 @@
       ref="form"
       v-model="sign_up_valid"
       lazy-validation
-      class="px-4 py-8 mr-2 ml-2 mt-6 mb-6 form_wrap"
+      class="px-4 py-8 mr-2 ml-2 mt-6 mb-6 form-wrap"
     >
       <labelField label="Full name"></labelField>
       <v-text-field
@@ -124,10 +124,3 @@ export default {
   }
 };
 </script>
-
-<style lang="scss" rel="stylesheet/scss">
-.form_wrap {
-  background: #fff;
-  border-radius: 20px;
-}
-</style>
