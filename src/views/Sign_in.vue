@@ -3,7 +3,7 @@
     <h1 class="headline font-weight-bold">Sign In</h1>
 
     <v-form ref="form" class="px-4 py-8 mt-6 mb-6 form">
-      <labelField label="E-mail"></labelField>
+      <label class="form__label">E-mail</label>
       <v-text-field
         v-model="form.email.value"
         :rules="form.email.rules"
@@ -14,7 +14,7 @@
       >
       </v-text-field>
 
-      <labelField label="Password"></labelField>
+      <label class="form__label">Password</label>
       <v-text-field
         :append-icon="form.password.show ? 'mdi-eye' : 'mdi-eye-off'"
         :rules="form.password.rules"
@@ -59,13 +59,8 @@
 </template>
 
 <script>
-import labelField from "../components/c-label-field.vue";
-
 export default {
   name: "sign_in",
-  components: {
-    labelField
-  },
   data() {
     return {
       form: {

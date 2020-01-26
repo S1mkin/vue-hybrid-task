@@ -8,7 +8,7 @@
       lazy-validation
       class="px-4 py-8 mt-6 mb-6 form"
     >
-      <labelField label="Full name"></labelField>
+      <label class="form__label">Full name</label>
       <v-text-field
         v-model="form.username.value"
         :rules="form.username.rules"
@@ -18,7 +18,7 @@
       >
       </v-text-field>
 
-      <labelField label="E-mail"></labelField>
+      <label class="form__label">E-mail</label>
       <v-text-field
         v-model="form.email.value"
         :rules="form.email.rules"
@@ -30,7 +30,7 @@
 
       <v-row no-gutters>
         <v-col cols="8">
-          <labelField label="Password"> </labelField>
+          <label class="form__label">Password</label>
         </v-col>
         <v-col cols="4" class="text-right pr-6">
           <v-tooltip top max-width="180">
@@ -54,7 +54,7 @@
         required
       ></v-text-field>
 
-      <labelField label="Repeat password"></labelField>
+      <label class="form__label">Repeat password</label>
       <v-text-field
         :append-icon="form.passwordConfirm.show ? 'mdi-eye' : 'mdi-eye-off'"
         :rules="form.passwordConfirm.rules"
@@ -89,13 +89,8 @@
 </template>
 
 <script>
-import labelField from "../components/c-label-field.vue";
-
 export default {
   name: "sign_up",
-  components: {
-    labelField
-  },
   data() {
     return {
       form: {
