@@ -2,11 +2,12 @@
   <v-container class="text-center">
     <h1 class="headline font-weight-bold">Sign In</h1>
 
-    <v-form ref="form" :lazy-validation="lazy" class="px-4 py-8 mt-6 mb-6 form">
+    <v-form ref="form" class="px-4 py-8 mt-6 mb-6 form">
       <labelField label="E-mail"></labelField>
       <v-text-field
         v-model="form.email.value"
         :rules="form.email.rules"
+        lazy-validation
         required
         rounded
         filled
@@ -91,18 +92,20 @@ export default {
   },
   methods: {
     SIGN_IN_SUBMIT() {
-      this.form.error = null;
+      if (this.$refs.form.validate()) {
+        this.form.error = null;
 
-      this.$store
-        .dispatch("SIGN_IN", {
-          email: this.form.email.value,
-          password: this.form.password.value
-        })
-        .then(() => {
-          console.log("Sign In success");
-          this.$router.push({ name: "Main" });
-        })
-        .catch(err => (this.form.error = err));
+        this.$store
+          .dispatch("SIGN_IN", {
+            email: this.form.email.value,
+            password: this.form.password.value
+          })
+          .then(() => {
+            console.log("Sign In success");
+            this.$router.push({ name: "Main" });
+          })
+          .catch(err => (this.form.error = err));
+      }
     },
     // custom close icon for alert
     CLOSE_ALERT() {

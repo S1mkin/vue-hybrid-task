@@ -29,7 +29,7 @@ export default {
     margin: 0 auto;
     max-width: 480px;
     width: 100%;
-    padding: 40px 20px 0 !important;
+    padding: 40px 0 0 !important;
   }
 
   #Enter_screen {

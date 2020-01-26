@@ -1,6 +1,6 @@
 <template>
   <div class="articles">
-    <v-container class="articles__header" align-center justify-center>
+    <v-container :class="CLASS_ARTICLES" align-center justify-center>
       <h1 class="headline font-weight-bold text-center mb-4">
         Articles
       </h1>
@@ -90,16 +90,28 @@
 
 <script>
 export default {
-  name: "main",
+  name: "articles",
+  created() {
+    window.addEventListener("scroll", this.ON_SCROLL);
+  },
+  destroyed() {
+    window.removeEventListener("scroll", this.ON_SCROLL);
+  },
   data() {
     return {
       search_articles: null,
-      articles_sort_asc: false
+      articles_sort_asc: false,
+      scrollY: 0
     };
   },
   computed: {
     GET_ARTICLES() {
       return this.$store.getters.GET_ARTICLES;
+    },
+    CLASS_ARTICLES() {
+      return this.scrollY == 0
+        ? "articles__header"
+        : "articles__header articles__header-shadow-bottom";
     }
   },
   methods: {
@@ -114,6 +126,9 @@ export default {
       this.$store.commit("SET_ARTICLES_SORT_ASC", {
         articles_sort_asc: this.articles_sort_asc
       });
+    },
+    ON_SCROLL() {
+      this.scrollY = window.scrollY;
     }
   },
   filters: {
@@ -142,7 +157,6 @@ $height_header: 165px;
     width: 100%;
     z-index: 2;
     background-color: $main-bg-color;
-    box-shadow: 0 8px 2px -4px rgba(0, 0, 0, 0.1);
     padding-bottom: 0;
     &__search-input {
       .v-icon {
@@ -150,8 +164,12 @@ $height_header: 165px;
       }
     }
   }
+  &__header-shadow-bottom {
+    box-shadow: 0 8px 8px 1px rgba(0, 0, 0, 0.1);
+  }
 
   &__items {
+    margin-bottom: 50px;
     &__row {
       &__title {
         line-height: 1.4em;
