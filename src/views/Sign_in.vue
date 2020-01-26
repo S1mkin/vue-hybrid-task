@@ -22,7 +22,7 @@
         v-model="form.password.value"
         rounded
         filled
-        class="input-group--focused field-password"
+        class="password"
         @click:append="form.password.show = !form.password.show"
         required
       ></v-text-field>
