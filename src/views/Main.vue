@@ -27,10 +27,20 @@
             rounded
             color="#FFF"
             height="46px"
-            width="90px"
-            class="text-capitalize ml-2"
+            class="articles__header__sort text-capitalize ml-2 "
             @click="SET_ARTICLES_SORT_ASC"
-            ><v-icon color="purple">mdi-swap-vertical</v-icon>
+            ><span
+              class="articles__header__sort__left-arrow"
+              :style="{
+                'background-color': articles_sort_asc ? '#ACB3DA' : ''
+              }"
+            ></span>
+            <span
+              class="articles__header__sort__right-arrow"
+              :style="{
+                'background-color': !articles_sort_asc ? '#ACB3DA' : ''
+              }"
+            ></span>
             <span v-html="articles_sort_asc ? 'Old' : 'New'"></span>
           </v-btn>
         </v-col>
@@ -160,7 +170,29 @@ $height_header: 165px;
     padding-bottom: 0;
     &__search-input {
       .v-icon {
-        color: purple !important;
+        color: #1f263c !important;
+      }
+    }
+    &__sort {
+      justify-content: left;
+      min-width: 91px;
+      &__left-arrow {
+        height: 14px;
+        width: 10px;
+        display: inline-block;
+        mask: url(../assets/arrow.svg) no-repeat left top;
+        background-color: #1f263c;
+        margin-top: -6px;
+      }
+      &__right-arrow {
+        height: 14px;
+        width: 10px;
+        margin-right: 4px;
+        display: inline-block;
+        mask: url(../assets/arrow.svg) no-repeat left top;
+        background-color: #1f263c;
+        margin-top: 6px;
+        transform: rotate(180deg);
       }
     }
   }

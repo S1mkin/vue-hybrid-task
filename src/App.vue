@@ -27,7 +27,7 @@ export default {
   background-color: $main-bg-color;
   main {
     margin: 0 auto;
-    max-width: 480px;
+    max-width: 720px;
     width: 100%;
     padding: 40px 0 0 !important;
   }
