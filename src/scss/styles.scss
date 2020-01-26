@@ -1,9 +1,17 @@
-.form-wrap {
+.form {
     background: #fff;
     border-radius: 20px;
-}
-
-.form-alert {
-    background: #FF6683;
-    border-radius: 50px;
+    .error--text {
+        .v-input__slot {
+            background: #ffe0e6 !important;
+        }
+    }
+    .password {
+        .v-icon {
+            color: #181C43 !important;
+        }
+    }
+    .v-input__slot {
+        background: #F3F3FA !important;
+    }
 }
