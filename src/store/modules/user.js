@@ -3,7 +3,14 @@ export default {
     username: "",
     email: "test@mail.ru",
     password: "12345678",
-    status_auth: false
+    status_auth: false,
+    users: [
+      {
+        username: "Andy Si",
+        email: "test@mail.ru",
+        password: "12345678"
+      }
+    ]
   },
   getters: {
     IS_LOGGED_IN(state) {
