@@ -4,7 +4,7 @@
       Ready for a great<br />User experience?
     </p>
 
-    <p class="mb-12">Bring your media to the next<br />level!</p>
+    <p class="mb-12">Bring your media to the next level!</p>
 
     <v-btn
       depressed

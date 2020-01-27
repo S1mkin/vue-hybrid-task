@@ -180,6 +180,7 @@ export default {
     &__search-input {
       .v-icon {
         color: #1f263c !important;
+        background: url(../assets/search.svg) no-repeat center center;
       }
     }
     &__sort {
@@ -210,7 +211,7 @@ export default {
     }
   }
   &__header-shadow-bottom {
-    box-shadow: 0 8px 8px 1px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 2px -2px #ddd;
   }
 
   &__items {
