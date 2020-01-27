@@ -1,6 +1,11 @@
 <template>
   <div class="articles">
-    <v-container :class="CLASS_ARTICLES" align-center justify-center>
+    <v-container
+      class="articles__header"
+      :class="scrollY > 0 ? 'articles__header-shadow-bottom' : ''"
+      align-center
+      justify-center
+    >
       <h1 class="headline font-weight-bold text-center mb-4">
         Articles
       </h1>
@@ -27,20 +32,38 @@
             rounded
             color="#FFF"
             height="46px"
-            class="articles__header__sort text-capitalize ml-2 "
+            class="articles__header__sort text-capitalize ml-2"
             @click="SET_ARTICLES_SORT_ASC"
-            ><span
-              class="articles__header__sort__left-arrow"
-              :style="{
-                'background-color': articles_sort_asc ? '#ACB3DA' : ''
-              }"
-            ></span>
+          >
             <span
-              class="articles__header__sort__right-arrow"
-              :style="{
-                'background-color': !articles_sort_asc ? '#ACB3DA' : ''
-              }"
-            ></span>
+              class="svg-icon-wrap"
+              :class="
+                articles_sort_asc
+                  ? 'articles__header__sort__arrow-left'
+                  : 'articles__header__sort__arrow-right'
+              "
+            >
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  fill-rule="evenodd"
+                  clip-rule="evenodd"
+                  d="M17 5.41421L17 15C17 15.5523 16.5523 16 16 16C15.4477 16 15 15.5523 15 15L15 5.41421L12.7071 7.70711C12.3166 8.09763 11.6834 8.09763 11.2929 7.70711C10.9024 7.31658 10.9024 6.68342 11.2929 6.29289L15.2929 2.29289C15.6834 1.90237 16.3166 1.90237 16.7071 2.29289L20.7071 6.29289C21.0976 6.68342 21.0976 7.31658 20.7071 7.70711C20.3166 8.09763 19.6834 8.09763 19.2929 7.70711L17 5.41421Z"
+                  fill="#1F263C"
+                />
+                <path
+                  fill-rule="evenodd"
+                  clip-rule="evenodd"
+                  d="M7 18.5858L7 9C7 8.44772 7.44772 8 8 8C8.55228 8 9 8.44772 9 9L9 18.5858L11.2929 16.2929C11.6834 15.9024 12.3166 15.9024 12.7071 16.2929C13.0976 16.6834 13.0976 17.3166 12.7071 17.7071L8.70711 21.7071C8.31658 22.0976 7.68342 22.0976 7.29289 21.7071L3.29289 17.7071C2.90237 17.3166 2.90237 16.6834 3.29289 16.2929C3.68342 15.9024 4.31658 15.9024 4.70711 16.2929L7 18.5858Z"
+                  fill="#ACB3DA"
+                />
+              </svg>
+            </span>
             <span v-html="articles_sort_asc ? 'Old' : 'New'"></span>
           </v-btn>
         </v-col>
@@ -117,11 +140,6 @@ export default {
   computed: {
     GET_ARTICLES() {
       return this.$store.getters.GET_ARTICLES;
-    },
-    CLASS_ARTICLES() {
-      return this.scrollY == 0
-        ? "articles__header"
-        : "articles__header articles__header-shadow-bottom";
     }
   },
   methods: {
@@ -158,8 +176,6 @@ export default {
 </script>
 
 <style lang="scss" rel="stylesheet/scss">
-$height_header: 165px;
-
 .articles {
   &__header {
     position: sticky;
@@ -175,24 +191,28 @@ $height_header: 165px;
     }
     &__sort {
       justify-content: left;
-      min-width: 91px;
-      &__left-arrow {
-        height: 14px;
-        width: 10px;
-        display: inline-block;
-        mask: url(../assets/arrow.svg) no-repeat left top;
-        background-color: #1f263c;
-        margin-top: -6px;
+      min-width: 90px !important;
+
+      &__arrow-left {
+        path {
+          &:first-child {
+            fill: #acb3da;
+          }
+          &:last-child {
+            fill: #1f263c;
+          }
+        }
       }
-      &__right-arrow {
-        height: 14px;
-        width: 10px;
-        margin-right: 4px;
-        display: inline-block;
-        mask: url(../assets/arrow.svg) no-repeat left top;
-        background-color: #1f263c;
-        margin-top: 6px;
-        transform: rotate(180deg);
+
+      &__sort__arrow-right {
+        path {
+          &:last-child {
+            fill: #acb3da;
+          }
+          &:first-child {
+            fill: #1f263c;
+          }
+        }
       }
     }
   }
