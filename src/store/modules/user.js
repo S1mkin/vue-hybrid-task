@@ -7,9 +7,9 @@ export default {
   },
   getters: {
     IS_LOGGED_IN(state) {
-      const currentUser = firebase.auth().currentUser();
+      const currentUser = firebase.auth().currentUser;
       if (!currentUser) {
-        state.commit("LOGOUT");
+        state.status_auth = false;
       }
       return state.status_auth;
     }
