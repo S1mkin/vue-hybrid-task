@@ -89,14 +89,12 @@ export default {
     SIGN_IN_SUBMIT() {
       if (this.$refs.form.validate()) {
         this.form.error = null;
-
         this.$store
           .dispatch("SIGN_IN", {
             email: this.form.email.value,
             password: this.form.password.value
           })
           .then(() => {
-            console.log("Sign In success");
             this.$router.push({ name: "Main" });
           })
           .catch(err => (this.form.error = err));
@@ -109,22 +107,3 @@ export default {
   }
 };
 </script>
-
-<style lang="scss" rel="stylesheet/scss">
-.form-alert-wrap {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  padding: 12px;
-  width: 100%;
-  .v-alert {
-    background-color: #ff6683;
-    border-radius: 50px;
-    color: #fff;
-    width: 100%;
-    .v-icon {
-      cursor: pointer;
-    }
-  }
-}
-</style>

@@ -2,12 +2,7 @@
   <v-container class="text-center">
     <h1 class="headline font-weight-bold">Sign Up</h1>
 
-    <v-form
-      ref="form"
-      v-model="form.error"
-      lazy-validation
-      class="px-4 py-8 mt-6 mb-6 form"
-    >
+    <v-form ref="form" class="px-4 py-8 mt-6 mb-6 form">
       <label class="form__label">Full name</label>
       <v-text-field
         v-model="form.username.value"
@@ -74,7 +69,6 @@
         color="primary"
         width="100%"
         class="text-capitalize mt-4"
-        :disabled="!form.error"
         @click="SIGN_UP_SUBMIT"
         >Sign Up</v-btn
       >
@@ -85,6 +79,16 @@
       <v-spacer></v-spacer>
       <router-link to="/sign_in">Sign In</router-link>
     </p>
+    <div class="form-alert-wrap" v-if="form.error !== null">
+      <v-alert>
+        <v-row align="center">
+          <v-col class="grow py-0 pr-0">{{ form.error }}</v-col>
+          <v-col class="shrink py-0 pl-0">
+            <v-icon dark @click="CLOSE_ALERT">mdi-close</v-icon>
+          </v-col>
+        </v-row>
+      </v-alert>
+    </div>
   </v-container>
 </template>
 
@@ -136,23 +140,28 @@ export default {
               "The password and confirmation password do not match"
           ],
           show: false
-        }
-      },
-      error: null
+        },
+        error: null
+      }
     };
   },
   methods: {
     SIGN_UP_SUBMIT() {
       if (this.$refs.form.validate()) {
+        this.form.error = null;
         this.$store
           .dispatch("SIGN_UP", {
             username: this.form.username.value,
-            email: this.form.email,
-            password: this.form.password
+            email: this.form.email.value,
+            password: this.form.password.value
           })
           .then(() => this.$router.push("/sign_in"))
           .catch(err => (this.form.error = err));
       }
+    },
+    // custom close icon for alert
+    CLOSE_ALERT() {
+      this.form.error = null;
     }
   }
 };

@@ -43,7 +43,11 @@
                   : 'articles__header__sort__arrow-right'
               "
             >
-              <icon-base width="24" height="24" icon-name="2Arrow"
+              <icon-base
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                icon-name="2Arrow"
                 ><icon-2Arrow
               /></icon-base>
             </span>

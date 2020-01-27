@@ -1,61 +1,60 @@
+import firebase from "firebase";
+
 export default {
   state: {
     username: "",
-    email: "test@mail.ru",
-    password: "12345678",
-    status_auth: false,
-    users: [
-      {
-        username: "Andy Si",
-        email: "test@mail.ru",
-        password: "12345678"
-      }
-    ]
+    status_auth: false
   },
   getters: {
     IS_LOGGED_IN(state) {
-      return state.status_auth === true ? true : false;
+      return state.status_auth;
     }
   },
   mutations: {
-    CREATE_USER(state, data) {
+    ADD_USER(state, data) {
       state.username = data.username;
-      state.email = data.email;
-      state.password = data.password; // ONLY FOR TEST
     },
-    LOGIN(state, data) {
-      if (data.email === state.email && data.password === state.password) {
-        return (state.status_auth = true);
-      } else {
-        return "Wrong";
-      }
+    LOGIN(state) {
+      state.status_auth = true;
     },
     LOGOUT(state) {
       state.status_auth = false;
     }
   },
   actions: {
-    SIGN_UP(state, data) {
+    SIGN_UP({ commit }, data) {
       /***************** 
-      ADD USER TO BACKEND - SEND AXIOS QUERY
-      data.password => MD5 HASH
+      sorry, but firebase don't support auth with username.. use only with vuex
+      use firebase or other backend (axios query)
       *****************/
-      state.commit("CREATE_USER", data);
-    },
-    SIGN_IN({ state, commit }, data) {
-      /***************** 
-      SEND AXIOS QUERY TO BACKEND
-      RESPONSE = true => RETURN TRUE
-      RESPONSE = false => RETURN FALSE
-      *****************/
-      commit("LOGIN", data);
-
       return new Promise((resolve, reject) => {
-        if (state.status_auth) {
-          resolve("Sign In success");
-        } else {
-          reject("Wrong email or password");
-        }
+        firebase
+          .auth()
+          .createUserWithEmailAndPassword(data.email, data.password)
+          .then(() => {
+            commit("ADD_USER", data);
+            resolve("Sign Up success!");
+          })
+          .catch(err => {
+            reject(err.message);
+          });
+      });
+    },
+    SIGN_IN({ commit }, data) {
+      /***************** 
+      use firebase or other backend (axios query)
+      *****************/
+      return new Promise((resolve, reject) => {
+        firebase
+          .auth()
+          .signInWithEmailAndPassword(data.email, data.password)
+          .then(() => {
+            commit("LOGIN");
+            resolve("Sign In success!!!");
+          })
+          .catch(err => {
+            reject(err.message);
+          });
       });
     }
   }
