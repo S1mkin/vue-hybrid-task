@@ -27,7 +27,7 @@
         <v-col cols="8">
           <label class="form__label">Password</label>
         </v-col>
-        <v-col cols="4" class="text-right pr-6">
+        <v-col cols="4" class="form__tooltip text-right pr-6">
           <v-tooltip top max-width="180">
             <template v-slot:activator="{ on }">
               <v-icon v-on="on" class="title">mdi-help-circle</v-icon>
@@ -69,10 +69,16 @@
         color="primary"
         width="100%"
         class="text-capitalize mt-4"
+        :disabled="form.sending"
         @click="SIGN_UP_SUBMIT"
-        >Sign Up</v-btn
+        ><v-progress-circular
+          v-show="form.sending"
+          size="18"
+          color="#FFF"
+          indeterminate
+        ></v-progress-circular>
+        <span v-show="!form.sending">Sign Up</span></v-btn
       >
-      <v-progress-circular indeterminate color="primary"></v-progress-circular>
     </v-form>
 
     <p>
@@ -142,7 +148,8 @@ export default {
           ],
           show: false
         },
-        error: null
+        error: null,
+        sending: false
       }
     };
   },

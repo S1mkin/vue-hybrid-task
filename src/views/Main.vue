@@ -180,9 +180,11 @@ export default {
     background-color: $main-bg-color;
     padding-bottom: 0;
     &__search-input {
-      .v-icon {
-        color: transparent !important;
-        background: url(../assets/search.svg) no-repeat center center;
+      .v-input__icon--prepend-inner {
+        .v-icon {
+          color: transparent !important;
+          background: url(../assets/search.svg) no-repeat center center;
+        }
       }
     }
     &__sort {

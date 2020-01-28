@@ -12,6 +12,12 @@
         text-align: left;
         display: block;
     }
+    &__tooltip {
+        i {
+            line-height: 20px !important;
+            margin-bottom: 4px;
+        }
+    }
     .error--text {
         .v-input__slot {
             background: #ffe0e6 !important;

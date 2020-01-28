@@ -34,8 +34,16 @@
         color="primary"
         width="100%"
         class="text-capitalize mt-4"
+        :disabled="form.sending"
         @click="SIGN_IN_SUBMIT"
-        >Sign In</v-btn
+      >
+        <v-progress-circular
+          v-show="form.sending"
+          size="18"
+          color="#FFF"
+          indeterminate
+        ></v-progress-circular>
+        <span v-show="!form.sending">Sign In</span></v-btn
       >
     </v-form>
 
@@ -47,9 +55,9 @@
 
     <div class="form-alert-wrap" v-if="form.error !== null">
       <v-alert>
-        <v-row align="center">
-          <v-col class="grow py-0 pr-0">{{ form.error }}</v-col>
-          <v-col class="shrink py-0 pl-0">
+        <v-row align="center" no-gutters>
+          <v-col class="grow">{{ form.error }}</v-col>
+          <v-col class="shrink">
             <v-icon dark @click="CLOSE_ALERT">mdi-close</v-icon>
           </v-col>
         </v-row>
@@ -81,13 +89,15 @@ export default {
           ],
           show: false
         },
-        error: null
+        error: null,
+        sending: false
       }
     };
   },
   methods: {
     SIGN_IN_SUBMIT() {
       if (this.$refs.form.validate()) {
+        this.form.sending = true;
         this.form.error = null;
         this.$store
           .dispatch("SIGN_IN", {
@@ -96,8 +106,12 @@ export default {
           })
           .then(() => {
             this.$router.push({ name: "Main" });
+            this.form.sending = false;
           })
-          .catch(err => (this.form.error = err));
+          .catch(err => {
+            this.form.error = err;
+            this.form.sending = false;
+          });
       }
     },
     // custom close icon for alert
