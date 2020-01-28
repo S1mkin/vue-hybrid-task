@@ -41,7 +41,8 @@ export default {
         image: require("@/assets/articles/preview-5.png")
       },
       {
-        title: "in aliqua mollit culpa ea",
+        title:
+          "Ex veniam labore incididunt quis duis cillum enim nisi excepteur. Enim minim cillum elit nisi velit.",
         category: "Tech",
         text:
           "Ex veniam labore incididunt quis duis cillum enim nisi excepteur. Enim minim cillum elit nisi velit. Anim culpa eiusmod adipisicing ex esse ipsum elit veniam consequat laboris proident ipsum cillum. Tempor deserunt aliquip magna consequat exercitation nisi sint. Voluptate Lorem aliqua est qui consectetur dolor commodo cillum commodo. Exercitation ex ad aliqua quis officia aute ipsum nulla magna sit pariatur est quis.\r\n",

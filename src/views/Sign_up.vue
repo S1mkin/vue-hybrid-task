@@ -72,6 +72,7 @@
         @click="SIGN_UP_SUBMIT"
         >Sign Up</v-btn
       >
+      <v-progress-circular indeterminate color="primary"></v-progress-circular>
     </v-form>
 
     <p>

@@ -71,23 +71,20 @@
           </v-avatar>
 
           <v-card-text class="pt-1">
-            <div class="caption font-weight-bold indigo--text">
+            <div class="articles__items__row__category">
               {{ article.category }}
             </div>
 
             <v-tooltip bottom width="100%">
               <template v-slot:activator="{ on }">
-                <h2
-                  class="articles__items__row__title subtitle-2 mt-1 mb-1"
-                  v-on="on"
-                >
-                  {{ article.title }}
+                <h2 class="articles__items__row__title mt-1 mb-1" v-on="on">
+                  {{ article.title | TRUNCATE_TEXT }}
                 </h2>
               </template>
               {{ article.text }}
             </v-tooltip>
 
-            <div class="overline grey--text">
+            <div class="articles__items__row__date">
               {{ article.date | DATE_TO_STR }}
             </div>
           </v-card-text>
@@ -163,6 +160,11 @@ export default {
       } else {
         return "";
       }
+    },
+    TRUNCATE_TEXT(value) {
+      let clamp = "...";
+      let length = 54;
+      return value.length > length ? value.slice(0, length) + clamp : value;
     }
   }
 };
@@ -179,7 +181,7 @@ export default {
     padding-bottom: 0;
     &__search-input {
       .v-icon {
-        color: #1f263c !important;
+        color: transparent !important;
         background: url(../assets/search.svg) no-repeat center center;
       }
     }
@@ -217,8 +219,21 @@ export default {
   &__items {
     margin-bottom: 50px;
     &__row {
+      &__category {
+        font-weight: 600;
+        font-size: 12px;
+        line-height: 20px;
+        color: #3c4ca9;
+      }
       &__title {
-        line-height: 1.4em;
+        font-size: 14px;
+        line-height: 140%;
+        color: rgba(0, 0, 0, 0.8);
+      }
+      &__date {
+        font-size: 10px;
+        line-height: 140%;
+        color: rgba(0, 0, 0, 0.6);
       }
     }
     &__after {
