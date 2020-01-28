@@ -23,11 +23,15 @@ export default {
 </script>
 
 <style lang="scss" rel="stylesheet/scss">
+body {
+  background-color: #444;
+}
 #app {
   background-color: $main-bg-color;
+  max-width: 720px;
+  margin: 0 auto;
   main {
     margin: 0 auto;
-    max-width: 720px;
     width: 100%;
     padding: 40px 0 0 !important;
   }
