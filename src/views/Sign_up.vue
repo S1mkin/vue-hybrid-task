@@ -32,7 +32,9 @@
             <template v-slot:activator="{ on }">
               <v-icon v-on="on" class="title">mdi-help-circle</v-icon>
             </template>
-            Password must contain 8+ symbols, 1 special and 2 capital letters
+            <div class="form__tooltip__text">
+              Password must contain 8+ symbols, 1 special and 2 capital letters
+            </div>
           </v-tooltip>
         </v-col>
       </v-row>

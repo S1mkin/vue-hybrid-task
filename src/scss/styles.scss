@@ -17,7 +17,25 @@
             line-height: 20px !important;
             margin-bottom: 4px;
         }
+        &__text {
+            position: relative;
+            text-align: center;
+            &:after {
+                border: medium solid transparent;
+                content: "";
+                top: 100%;
+                left: 78%;
+                position: absolute;
+                height: 0;
+                width: 0;
+                border-color: $tooltip-background-color rgba(255, 212, 52, 0)
+                  rgba(255, 212, 52, 0);
+                border-width: 14px;
+                margin-left: -14px;
+              }
+        }
     }
+
     .error--text {
         .v-input__slot {
             background: #ffe0e6 !important;
