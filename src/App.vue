@@ -28,8 +28,9 @@ body {
 }
 #app {
   background-color: $main-bg-color;
-  max-width: 720px;
+  max-width: 480px;
   margin: 0 auto;
+  position: relative;
   main {
     margin: 0 auto;
     width: 100%;

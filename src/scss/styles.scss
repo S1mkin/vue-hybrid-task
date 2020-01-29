@@ -13,25 +13,28 @@
         display: block;
     }
     &__tooltip {
+        justify-content: right;
         i {
             line-height: 20px !important;
             margin-bottom: 4px;
         }
         &__text {
-            position: relative;
             text-align: center;
+            width: 210px;
+            right: 20px !important;
+            left: auto !important;
             &:after {
                 border: medium solid transparent;
                 content: "";
                 top: 100%;
-                left: 78%;
+                right: 33px;
                 position: absolute;
                 height: 0;
                 width: 0;
                 border-color: $tooltip-background-color rgba(255, 212, 52, 0)
                   rgba(255, 212, 52, 0);
-                border-width: 14px;
-                margin-left: -14px;
+                border-width: 10px;
+                margin-left: -10px;
               }
         }
     }

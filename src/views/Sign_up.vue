@@ -27,14 +27,12 @@
         <v-col cols="8">
           <label class="form__label">Password</label>
         </v-col>
-        <v-col cols="4" class="d-flex form__tooltip text-right pr-6">
-          <v-tooltip top>
+        <v-col cols="4" class="form__tooltip text-right pr-6">
+          <v-tooltip top open-on-click content-class="form__tooltip__text">
             <template v-slot:activator="{ on }">
               <v-icon v-on="on" class="title">mdi-help-circle</v-icon>
             </template>
-            <div class="form__tooltip__text">
-              Password must contain 8+ symbols, 1 special and 2 capital letters
-            </div>
+            Password must contain 8+ symbols, 1 special and 2 capital letters
           </v-tooltip>
         </v-col>
       </v-row>
