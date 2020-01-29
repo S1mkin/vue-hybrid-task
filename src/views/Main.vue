@@ -70,22 +70,21 @@
             <v-img height="80" width="80" :src="article.image"></v-img>
           </v-avatar>
 
-          <v-card-text class="pt-1">
+          <v-card-text class="pt-1 pb-0">
             <div class="articles__items__row__category">
               {{ article.category }}
             </div>
 
-            <v-tooltip bottom width="100%">
-              <template v-slot:activator="{ on }">
-                <h2 class="articles__items__row__title mt-1 mb-1" v-on="on">
-                  {{ article.title | TRUNCATE_TEXT }}
-                </h2>
-              </template>
-              {{ article.text }}
-            </v-tooltip>
+            <h2 class="articles__items__row__title mt-1 mb-1" v-on="on">
+              {{ article.title | TRUNCATE_TEXT }}
+            </h2>
 
             <div class="articles__items__row__date">
               {{ article.date | DATE_TO_STR }}
+            </div>
+
+            <div class="articles__items__row__text">
+              {{ article.text }}
             </div>
           </v-card-text>
         </div>
@@ -124,6 +123,7 @@ export default {
     return {
       search_articles: null,
       articles_sort_asc: false,
+      article_active: null,
       scrollY: 0
     };
   },
@@ -236,6 +236,20 @@ export default {
         font-size: 10px;
         line-height: 140%;
         color: rgba(0, 0, 0, 0.6);
+      }
+      &__text {
+        opacity: 0;
+        visibility: hidden;
+        height: 0;
+        margin-top: 10px;
+        border-top: 1px solid #fff;
+        transition: 0.55s opacity, 0.55s visibility, 0.55s height;
+      }
+      &:hover &__text {
+        opacity: 1;
+        visibility: visible;
+        height: 100%;
+        padding-top: 10px;
       }
     }
     &__after {
